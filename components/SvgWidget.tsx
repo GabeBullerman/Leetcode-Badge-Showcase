@@ -4,10 +4,12 @@ import themes from '../utils/themes.json';
 /**
  * The main SVG widget.
  */
-export default function SvgWidget({ response, username, imgSource, theme, border, animated }): JSX.Element {
+export default function SvgWidget({ response, username, imgSource, theme, border, animated, total }): JSX.Element {
     const borderStyle = border === 'border' ? '1px solid #E4E2E2' : 'none';
     // Make SVG have transparent background if using transparent theme
     const isTransparent = theme === 'transparent';
+    // Total badges across every category (independent of whether the username is shown).
+    const totalBadges = response?.reduce((sum, category) => sum + (category?.badges?.length ?? 0), 0) ?? 0;
 
     return (
         <g>
@@ -26,6 +28,11 @@ export default function SvgWidget({ response, username, imgSource, theme, border
                                     <img src={imgSource} alt="LeetCode Logo" title="LeetCode Logo" width={36} height={36} />
                                     <span>{username?.trim() ? `${username.trim()} LeetCode Badges` : 'LeetCode Badges'}</span>
                                 </span>
+                                {total !== 'false' &&
+                                    <span className='total' style={{ color: `${themes[theme].colorSecondary}` }}>
+                                        {totalBadges} {totalBadges === 1 ? 'badge' : 'badges'} earned
+                                    </span>
+                                }
                                 <hr style={{ backgroundColor: `${themes[theme].colorSecondary}` }} />
                             </div>
                             {response?.map((category: Object, index: number) => {

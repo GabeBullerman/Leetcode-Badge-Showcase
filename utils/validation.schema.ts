@@ -6,6 +6,7 @@ export const validationSchema = Joi.object().keys({
     theme: Joi.string().valid(...THEME_NAMES).default('light'),
     animated: Joi.string().valid('true', 'false').default('false'),
     anon: Joi.string().valid('true', 'false').default('false'),
+    total: Joi.string().valid('true', 'false').default('true'),
     limit: Joi.number().integer().min(1).max(500),
     filter: Joi.string().valid(...Object.keys(FILTERS)),
     border: Joi.string().valid('border', 'no-border').default('border'),

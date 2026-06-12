@@ -8,15 +8,19 @@ import { allStyles } from '../styles/svg';
  * @returns {height:number, width:number} 
  * Used to calculate dimensions of svg
  */
-const calculateDimensions = (response: Array<any>, border: string) => {
+const calculateDimensions = (response: Array<any>, border: string, total: string) => {
     let height = 53 + (16 * 2); //header + padding top and bottom (1rem + 1rem)
+    if (total !== 'false') {
+        height += 18; // "X badges earned" line under the header
+    }
     if (border === 'border') {
         height += 2; // add border of 1px on either side
     }
     let columns = 1;
     response.forEach(category => {
         height += 27; // category header
-        height += Math.ceil(category.badges.length / 4) * 107; //height of row of badges = 107px;
+        // row height = icon (48) + up to 2 wrapped name lines + padding/margin
+        height += Math.ceil(category.badges.length / 4) * 100;
         columns = Math.max(columns, category.badges.length);
     })
     let width = 300; //for 1, 2 columns
@@ -27,10 +31,10 @@ const calculateDimensions = (response: Array<any>, border: string) => {
 /**
  * Returns SVG as a string.
  */
-export function generateSvg(response: Array<any>, username: string, imgSource: string, theme: string, border: string, animated: string): string {
-    const { height, width } = calculateDimensions(response, border);
+export function generateSvg(response: Array<any>, username: string, imgSource: string, theme: string, border: string, animated: string, total: string): string {
+    const { height, width } = calculateDimensions(response, border, total);
     const svgBody = ReactDOMServer.renderToStaticMarkup(
-        <SvgWidget response={response} username={username} imgSource={imgSource} theme={theme} border={border} animated={animated} />
+        <SvgWidget response={response} username={username} imgSource={imgSource} theme={theme} border={border} animated={animated} total={total} />
     );
 
     return `

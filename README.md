@@ -147,6 +147,25 @@ You can combine it with other parameters (e.g. filter + animated):
 ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=kevzpeter&filter=annual&animated=true&limit=12)
 ```
 
+<br/>
+
+## 🧮 Total Badge Count
+
+The card header shows a **"X badges earned"** summary line by default. It counts every badge currently displayed, so it respects any `filter` or `limit` you've applied — and it still appears when the username is hidden with `anon=true`.
+
+To hide the count, add the parameter `total` and set its value to `false`:
+
+```html
+<img src="https://leetcode-badge-showcase.vercel.app/api?username={your-leetcode-username}&total=false" alt="LeetCode Badges" />
+```
+
+<br/>
+
+## 🏷️ Badge Labels
+
+- Badge **achievement dates are no longer shown**, for a cleaner, more compact card.
+- Long badge names now **wrap onto a second line** instead of being cut off with an ellipsis (`…`), so titles like _"Introduction to Pandas"_ stay readable.
+
 <!-- BUILT WITH -->
 
 ## 🔧 Built With

@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             })
         }
         console.log(value);
-        let { username, theme, filter, border, json, animated, anon, limit }: Params = value;
+        let { username, theme, filter, border, json, animated, anon, limit, total }: Params = value;
         if (filter) filter = FILTERS[`${filter}`];
 
         //GraphQL query to fetch badges from Leetcode's API endpoint
@@ -175,7 +175,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             res.setHeader('Cache-Control', 'max-age=604800, stale-while-revalidate=86400');
             res.setHeader('Content-Type', 'image/svg+xml');
             res.statusCode = 200;
-            res.send(generateSvg(responseData, anon === 'true' ? '' : username, imgSource, theme, border, animated));
+            res.send(generateSvg(responseData, anon === 'true' ? '' : username, imgSource, theme, border, animated, total));
         }
     }
     catch (err: any) {

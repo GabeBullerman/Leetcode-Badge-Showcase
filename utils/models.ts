@@ -10,6 +10,7 @@ export interface Params {
     border: string,
     animated: string,
     anon: string,
+    total: string,
     limit?: number
 }
 export interface Badge {

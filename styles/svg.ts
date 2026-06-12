@@ -86,17 +86,19 @@ a {
   margin: 0;
   font-size: 0.7rem;
   font-weight: 500;
-  line-height: 1.5;
-  overflow: hidden;
-  display: inline-block;
-  text-overflow: ellipsis;
+  line-height: 1.4;
   max-width: 80px;
-  white-space: nowrap;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
-.badge h6 {
-  margin: 0;
-  font-size: 0.6rem;
-  line-height: 1.5;
-  font-weight: 600;
+.showCase .total {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0.1rem 0 0;
+  opacity: 0.85;
 }
 `;
