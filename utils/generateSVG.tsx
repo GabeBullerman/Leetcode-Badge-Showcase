@@ -19,8 +19,8 @@ const calculateDimensions = (response: Array<any>, border: string, total: string
     let columns = 1;
     response.forEach(category => {
         height += 27; // category header
-        // row height = icon (48) + up to 2 wrapped name lines + padding/margin
-        height += Math.ceil(category.badges.length / 4) * 100;
+        // row height = icon (48) + reserved 2 name lines + padding/margin
+        height += Math.ceil(category.badges.length / 4) * 102;
         columns = Math.max(columns, category.badges.length);
     })
     let width = 300; //for 1, 2 columns

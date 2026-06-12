@@ -10,6 +10,15 @@ export default function SvgWidget({ response, username, imgSource, theme, border
     const isTransparent = theme === 'transparent';
     // Total badges across every category (independent of whether the username is shown).
     const totalBadges = response?.reduce((sum, category) => sum + (category?.badges?.length ?? 0), 0) ?? 0;
+    // Cumulative badge index at the start of each category. Lets every badge know its
+    // global position so animation delays can stagger evenly across the whole card
+    // (delay = globalIndex / totalBadges * duration) instead of being random per-GIF.
+    let running = 0;
+    const categoryStart = (response ?? []).map((category) => {
+        const start = running;
+        running += category?.badges?.length ?? 0;
+        return start;
+    });
 
     return (
         <g>
@@ -36,7 +45,7 @@ export default function SvgWidget({ response, username, imgSource, theme, border
                                 <hr style={{ backgroundColor: `${themes[theme].colorSecondary}` }} />
                             </div>
                             {response?.map((category: Object, index: number) => {
-                                return (<Category category={category} key={index} theme={theme} border={border} animated={animated} />)
+                                return (<Category category={category} key={index} theme={theme} border={border} animated={animated} startIndex={categoryStart[index]} total={totalBadges} />)
                             })}
                         </div>
                     }

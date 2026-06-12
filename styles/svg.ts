@@ -65,7 +65,7 @@ a {
 }
 .grid {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: left;
   flex-wrap: wrap;
   max-width: 480px;
@@ -82,12 +82,27 @@ a {
   max-width: 80px;
 }
 
+.badge img {
+  display: block;
+  margin: 0 auto 0.15rem;
+}
+.badge img.animated-icon {
+  animation: badgeFloat 1.8s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 .badge p {
   margin: 0;
   font-size: 0.7rem;
   font-weight: 500;
   line-height: 1.4;
   max-width: 80px;
+  /* Reserve two lines for every badge so wrapped and single-line names keep the
+     same overall height and all icons stay aligned on the same top baseline. */
+  min-height: 2.8em;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;

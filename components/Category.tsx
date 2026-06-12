@@ -9,13 +9,13 @@ const categoryEnum = {
     SUBMISSION: 'Submission Days'
 }
 
-const Category = ({ category, theme, animated }) => {
+const Category = ({ category, theme, animated, startIndex = 0, total = 1 }) => {
     return (
         <div className="category">
             <p id="title" style={{ 'color': `${themes[theme].colorSecondary}` }}>{categoryEnum[category.categoryName]}</p>
             <div className="grid">
                 {category.badges.map((badge: Object, index: number) => {
-                    return (<Badge badge={badge} key={index} theme={theme} animated={animated} />)
+                    return (<Badge badge={badge} key={index} theme={theme} animated={animated} index={startIndex + index} total={total} />)
                 })}
             </div>
         </div>
